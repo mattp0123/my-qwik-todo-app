@@ -1,17 +1,26 @@
-import { component$ } from "@builder.io/qwik";
+import type { Session } from '@auth/core/types';
+import { component$ } from '@builder.io/qwik';
 import {
-  type DocumentHead,
-  routeLoader$,
-  routeAction$,
-  zod$,
-  z,
   Form,
-} from "@builder.io/qwik-city";
-import styles from "./todolist.module.css";
+  routeAction$,
+  routeLoader$,
+  z,
+  zod$,
+  type DocumentHead,
+  type RequestHandler,
+} from '@builder.io/qwik-city';
+import styles from './todolist.module.css';
 
 interface ListItem {
   text: string;
 }
+
+export const onRequest: RequestHandler = async (event) => {
+  const session: Session | null = event.sharedMap.get('session');
+  if (!session || new Date(session.expires) < new Date()) {
+    throw event.redirect(302, `/api/auth/signin?callbackUrl=${event.url.href}`);
+  }
+};
 
 export const list: ListItem[] = [];
 
@@ -59,7 +68,7 @@ export default component$(() => {
 
       <div class="container container-center">
         <Form action={action} spaReset>
-          <input type="text" name="text" required class={styles.input} />{" "}
+          <input type="text" name="text" required class={styles.input} />{' '}
           <button type="submit" class="button-dark">
             Add item
           </button>
@@ -74,5 +83,5 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Qwik Todo List",
+  title: 'Qwik Todo List',
 };
