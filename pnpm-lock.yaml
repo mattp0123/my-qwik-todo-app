@@ -38,6 +38,9 @@ devDependencies:
   prettier:
     specifier: 2.8.8
     version: 2.8.8
+  qwik-speak:
+    specifier: ^0.15.0
+    version: 0.15.0(@builder.io/qwik@1.2.6)
   typescript:
     specifier: 5.1.6
     version: 5.1.6
@@ -2979,6 +2982,16 @@ packages:
 
   /queue-tick@1.0.1:
     resolution: {integrity: sha512-kJt5qhMxoszgU/62PLP1CJytzd2NKetjSRnyuj31fDd3Rlcz3fzlFdFLD1SItunPwyqEOkca6GbV612BWfaBag==}
+    dev: true
+
+  /qwik-speak@0.15.0(@builder.io/qwik@1.2.6):
+    resolution: {integrity: sha512-UnSQG2cbxdzybMUHJuQn39B+lx/guXUCQ2xCmWa3abV6YRrh40Sp2a34VuHFWoR/vEyb9Z7jrTtr/Ihhf9VRFQ==}
+    engines: {node: '>=16.0.0'}
+    hasBin: true
+    peerDependencies:
+      '@builder.io/qwik': '>=1.1.4'
+    dependencies:
+      '@builder.io/qwik': 1.2.6(undici@5.22.1)
     dev: true
 
   /rc@1.2.8:
